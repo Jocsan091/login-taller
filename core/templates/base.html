@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Proyecto-Numero-4{% endblock %}</title>
+
+
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+            <span>Hola, {{ user.username }}</span> |
+            <a href="{% url 'home' %}">Inicio</a> |
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Cerrar sesión</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+        {% endif %}
+</nav>
+
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>
